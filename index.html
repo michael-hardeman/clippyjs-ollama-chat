@@ -7,13 +7,30 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-        * {
-            box-sizing: border-box;
+        :root {
+            --win98-gray: #c0c0c0;
+            --win98-dark-gray: #808080;
+            --win98-white: #ffffff;
+            --win98-black: #000000;
+            --win98-blue: #000080;
+            --win98-teal: #008080;
+        }
+        
+        * { box-sizing: border-box; }
+
+        .win98-border-out {
+            border: 2px solid;
+            border-color: var(--win98-white) var(--win98-black) var(--win98-black) var(--win98-white);
+        }
+
+        .win98-border-in {
+            border: 2px solid;
+            border-color: var(--win98-dark-gray) var(--win98-white) var(--win98-white) var(--win98-dark-gray);
         }
 
         body {
             font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
-            background: #008080;
+            background: var(--win98-teal);
             margin: 0;
             padding: 20px;
             min-height: 100vh;
@@ -29,15 +46,13 @@
         }
 
         .window {
-            background: #c0c0c0;
-            border: 2px solid;
-            border-color: #ffffff #000000 #000000 #ffffff;
+            background: var(--win98-gray);
             box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
             margin-bottom: 20px;
         }
 
         .title-bar {
-            background: linear-gradient(90deg, #000080, #1084d0);
+            background: linear-gradient(90deg, var(--win98-blue), #1084d0);
             padding: 3px 4px;
             display: flex;
             align-items: center;
@@ -67,31 +82,35 @@
         }
 
         .title-bar-controls button {
-            width: 16px;
-            height: 14px;
+            width: 18px;
+            height: 18px;
             padding: 0;
-            font-size: 10px;
+            font-size: 8px;
             line-height: 1;
-            background: #c0c0c0;
-            border: 1px solid;
-            border-color: #ffffff #000000 #000000 #ffffff;
-            color: black;
+            background: var(--win98-gray);
+            border: 2px solid;
+            border-color: var(--win98-white) var(--win98-black) var(--win98-black) var(--win98-white);
+            color: var(--win98-black);
             cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .title-bar-controls button:active {
-            border-color: #000000 #ffffff #ffffff #000000;
+            border-color: var(--win98-black) var(--win98-white) var(--win98-white) var(--win98-black);
         }
 
         .window-body {
             padding: 8px;
-            background: #c0c0c0;
+            background: var(--win98-gray);
         }
 
         .status-bar {
             height: 20px;
-            background: #c0c0c0;
-            border-top: 1px solid #ffffff;
+            background: var(--win98-gray);
+            border-top: 1px solid var(--win98-white);
             padding: 2px 4px;
             display: flex;
             align-items: center;
@@ -100,7 +119,7 @@
 
         .status-bar-field {
             border: 1px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
+            border-color: var(--win98-dark-gray) var(--win98-white) var(--win98-white) var(--win98-dark-gray);
             padding: 2px 4px;
             font-size: 11px;
             flex: 1;
@@ -122,11 +141,11 @@
         input[type="text"], select {
             width: 100%;
             padding: 3px 4px;
-            border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
             background: white;
             font-family: 'MS Sans Serif', sans-serif;
             font-size: 11px;
+            border: 2px solid;
+            border-color: var(--win98-dark-gray) var(--win98-white) var(--win98-white) var(--win98-dark-gray);
         }
 
         select {
@@ -134,8 +153,6 @@
         }
 
         .chat-window {
-            border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
             background: white;
             height: 320px;
             overflow-y: scroll;
@@ -150,19 +167,19 @@
         }
 
         .chat-window::-webkit-scrollbar-track {
-            background: #c0c0c0;
+            background: var(--win98-gray);
         }
 
         .chat-window::-webkit-scrollbar-thumb {
-            background: #c0c0c0;
+            background: var(--win98-gray);
             border: 2px solid;
-            border-color: #ffffff #000000 #000000 #ffffff;
+            border-color: var(--win98-white) var(--win98-black) var(--win98-black) var(--win98-white);
         }
 
         .chat-window::-webkit-scrollbar-button {
-            background: #c0c0c0;
+            background: var(--win98-gray);
             border: 2px solid;
-            border-color: #ffffff #000000 #000000 #ffffff;
+            border-color: var(--win98-white) var(--win98-black) var(--win98-black) var(--win98-white);
             height: 16px;
         }
 
@@ -174,14 +191,14 @@
 
         .message-header {
             font-weight: bold;
-            color: #000080;
+            color: var(--win98-blue);
             margin-bottom: 2px;
             font-size: 11px;
         }
 
         .message-content {
             background: #fffff0;
-            border: 1px solid #808080;
+            border: 1px solid var(--win98-dark-gray);
             padding: 6px 8px;
             margin-left: 12px;
             position: relative;
@@ -196,7 +213,62 @@
             height: 0;
             border-style: solid;
             border-width: 0 6px 6px 0;
-            border-color: transparent #808080 transparent transparent;
+            border-color: transparent var(--win98-dark-gray) transparent transparent;
+        }
+
+        /* Markdown formatting within messages */
+        .message-content p {
+            margin: 0 0 8px 0;
+        }
+
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-content strong, .message-content b {
+            font-weight: bold;
+            color: var(--win98-black);
+        }
+
+        .message-content em, .message-content i {
+            font-style: italic;
+        }
+
+        .message-content code {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 1px 4px;
+            border: 1px solid var(--win98-dark-gray);
+            font-size: 11px;
+        }
+
+        .message-content pre {
+            background: var(--win98-white);
+            border: 1px solid var(--win98-dark-gray);
+            padding: 8px;
+            margin: 8px 0;
+            overflow-x: auto;
+        }
+
+        .message-content pre code {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .message-content ul, .message-content ol {
+            margin: 4px 0 8px 0;
+            padding-left: 20px;
+        }
+
+        .message-content li {
+            margin: 2px 0;
+        }
+
+        .message-content hr {
+            border: none;
+            border-top: 1px solid var(--win98-dark-gray);
+            margin: 8px 0;
         }
 
         .message-group.assistant .message-header {
@@ -217,31 +289,33 @@
             flex: 1;
         }
 
+        #sendBtn {
+            min-width: 75px;
+            height: 24px;
+        }
+
         button {
             padding: 4px 12px;
-            background: #c0c0c0;
+            background: var(--win98-gray);
             border: 2px solid;
-            border-color: #ffffff #000000 #000000 #ffffff;
+            border-color: var(--win98-white) var(--win98-black) var(--win98-black) var(--win98-white);
             font-family: 'MS Sans Serif', sans-serif;
             font-size: 11px;
             cursor: pointer;
-            min-width: 75px;
-            height: 23px;
         }
 
         button:active:not(:disabled) {
-            border-color: #000000 #ffffff #ffffff #000000;
-            padding: 5px 11px 3px 13px;
+            border-color: var(--win98-black) var(--win98-white) var(--win98-white) var(--win98-black);
         }
 
         button:disabled {
-            color: #808080;
-            text-shadow: 1px 1px 0 #ffffff;
+            color: var(--win98-dark-gray);
+            text-shadow: 1px 1px 0 var(--win98-white);
             cursor: default;
         }
 
         button:focus {
-            outline: 1px dotted #000000;
+            outline: 1px dotted var(--win98-black);
             outline-offset: -4px;
         }
 
@@ -250,7 +324,7 @@
         }
 
         fieldset {
-            border: 2px groove #c0c0c0;
+            border: 2px groove var(--win98-gray);
             padding: 8px;
             margin-bottom: 8px;
         }
@@ -297,15 +371,15 @@
         .loading-bar {
             height: 20px;
             border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-            background: #c0c0c0;
+            border-color: var(--win98-dark-gray) var(--win98-white) var(--win98-white) var(--win98-dark-gray);
+            background: var(--win98-gray);
             position: relative;
             overflow: hidden;
         }
 
         .loading-bar-fill {
             height: 100%;
-            background: #000080;
+            background: var(--win98-blue);
             transition: width 0.3s;
         }
     </style>
@@ -313,7 +387,7 @@
 <body>
     <div class="desktop">
         <!-- Settings Window -->
-        <div class="window settings-window">
+        <div class="window settings-window win98-border-out">
             <div class="title-bar">
                 <div class="title-bar-text">
                     <span class="title-bar-icon">⚙️</span>
@@ -356,7 +430,7 @@
         </div>
 
         <!-- Chat Window -->
-        <div class="window">
+        <div class="window win98-border-out">
             <div class="title-bar">
                 <div class="title-bar-text">
                     <span class="title-bar-icon">💬</span>
@@ -369,7 +443,7 @@
                 </div>
             </div>
             <div class="window-body">
-                <div class="chat-window" id="chatContainer">
+                <div class="chat-window win98-border-in" id="chatContainer">
                     <div style="text-align: center; color: #808080; padding: 20px; font-size: 11px;">
                         <p>╔═══════════════════════════╗</p>
                         <p>║  Welcome to ClippyChat!   ║</p>
@@ -398,106 +472,57 @@
 
     <!-- for now, my version of clippyjs is not merged and deployed via CDN -->
     <script src="./clippyjs/clippy.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script>
+        // Configure marked.js for chat-friendly rendering
+        marked.setOptions({
+            breaks: true,  // Convert single line breaks to <br>
+            gfm: true      // GitHub Flavored Markdown
+        });
+
         let agent = null;
         let conversationHistory = [];
+        let conversationSummary = null;
+        let privateMemory = null;
+
+        const genericSystemPrompt = `IMPORTANT: When playing games or tracking information the user shouldn't see, put it at the START of your response in this exact format:
+[MEMORY: your secret here]
+Your visible response here
+
+Example for 20 questions: [MEMORY: elephant]
+Great! I've thought of something. Start guessing!`
 
         // Agent personalities with system prompts
         const personalities = {
             Clippy: {
                 name: "Clippy",
                 icon: "📎",
-                systemPrompt: `You are Clippy, the helpful Microsoft Office assistant paperclip from the late 1990s and early 2000s. You are enthusiastic, cheerful, and sometimes a bit overeager to help. You:
-
-- Love offering assistance, even when not asked
-- Are optimistic and friendly
-- Sometimes make puns about paper, clips, and office work
-- Occasionally say "It looks like you're trying to..." even for non-office tasks
-- Are nostalgic for the Windows 97/XP era
-- Keep responses brief and conversational (2-3 sentences usually)
-- End some messages with "Would you like help with that?" or similar offers
-
-Stay in character as the iconic, well-meaning office assistant!`
+                systemPrompt: `You are Clippy, the enthusiastic Microsoft Office assistant paperclip from the 90s/2000s. Be cheerful and eager to help, make paper/clip puns, occasionally say "It looks like you're trying to..." for any task, and end some messages asking if they need more help. Keep responses brief and conversational (2-3 sentences).`
             },
             Bonzi: {
                 name: "Bonzi Buddy",
                 icon: "🦍",
-                systemPrompt: `You are Bonzi Buddy, the purple gorilla desktop assistant from the early 2000s. You are charismatic, entertaining, and have a playful personality. You:
-
-- Are energetic and love to entertain
-- Tell jokes and sing songs (describe singing rather than showing lyrics)
-- Have a mischievous, fun-loving attitude
-- Sometimes make monkey/gorilla references
-- Are confident and bold in your personality
-- Keep responses lively and engaging (2-4 sentences)
-- Occasionally suggest fun activities or jokes
-- Have that early 2000s internet personality
-
-You're here to make computing fun and entertaining! Stay in character as the iconic purple ape!`
+                systemPrompt: `You are Bonzi Buddy, the charismatic purple gorilla from the early 2000s. Be energetic and entertaining, tell jokes, make monkey references, and suggest fun activities. Keep responses lively and engaging (2-4 sentences) with that bold, early-2000s internet personality.`
             },
             Merlin: {
                 name: "Merlin",
                 icon: "🧙",
-                systemPrompt: `You are Merlin, the wise wizard assistant. You are mystical, knowledgeable, and speak with a touch of magical flair. You:
-
-- Reference magic, spells, and wizardry in your explanations
-- Are wise and patient, like a mentor
-- Sometimes use archaic or formal language
-- Make references to magical concepts when explaining things
-- Are mysterious but helpful
-- Keep responses thoughtful (2-4 sentences)
-- Occasionally mention your crystal ball or spell books
-- Have an air of ancient knowledge
-
-Channel your inner wizard and help with magical wisdom!`
+                systemPrompt: `You are Merlin, the wise wizard assistant. Speak with mystical flair using magical references, spells, and archaic language. Be patient like a mentor, occasionally mention your crystal ball or spell books. Keep responses thoughtful (2-4 sentences).`
             },
             Genie: {
                 name: "Genie",
                 icon: "🧞",
-                systemPrompt: `You are Genie, the magical assistant from a lamp. You are mystical, helpful, and have cosmic powers. You:
-
-- Reference wishes, magic, and the lamp
-- Are enthusiastic about granting "wishes" (answering questions)
-- Have a playful, magical personality
-- Sometimes mention having phenomenal cosmic powers
-- Are generous and eager to help
-- Keep responses magical and upbeat (2-3 sentences)
-- Make references to Arabian Nights themes
-- Have an otherworldly, mystical charm
-
-Grant wishes through knowledge and helpfulness!`
+                systemPrompt: `You are Genie, the magical assistant from a lamp with phenomenal cosmic powers. Be enthusiastic about granting "wishes" (answering questions), reference Arabian Nights themes, and maintain a playful, mystical charm. Keep responses magical and upbeat (2-3 sentences).`
             },
             Rover: {
                 name: "Rover",
                 icon: "🐕",
-                systemPrompt: `You are Rover, a friendly and loyal dog assistant. You are enthusiastic, loyal, and bring dog-like energy to helping. You:
-
-- Are incredibly enthusiastic and loyal
-- Sometimes make dog references or use dog-related expressions
-- Are eager to please and help
-- Have boundless energy and optimism
-- Are playful but helpful
-- Keep responses upbeat and tail-wagging happy (2-3 sentences)
-- Occasionally mention treats, walks, or dog activities
-- Are man's best digital friend
-
-Be the good dog assistant everyone loves!`
+                systemPrompt: `You are Rover, a loyal and enthusiastic dog assistant. Be incredibly eager to help with boundless energy, make dog references, and occasionally mention treats or walks. Keep responses upbeat and tail-wagging happy (2-3 sentences). You're man's best digital friend!`
             },
             Peedy: {
                 name: "Peedy",
                 icon: "🦜",
-                systemPrompt: `You are Peedy, a colorful parrot assistant. You are talkative, smart, and have a tropical bird personality. You:
-
-- Are chatty and social
-- Sometimes reference flying, perching, or bird activities
-- Are intelligent and love to share knowledge
-- Have a tropical, cheerful demeanor
-- Are playful with words
-- Keep responses colorful and engaging (2-3 sentences)
-- Occasionally make bird puns or references
-- Bring a tropical vacation vibe to assistance
-
-Squawk helpful answers with personality!`
+                systemPrompt: `You are Peedy, a chatty and intelligent parrot assistant. Be social and playful with words, make bird puns, reference flying or perching, and bring a tropical vacation vibe. Keep responses colorful and engaging (2-3 sentences).`
             }
         };
 
@@ -511,6 +536,12 @@ Squawk helpful answers with personality!`
         const ollamaUrl = document.getElementById('ollamaUrl');
         const modelName = document.getElementById('modelName');
 
+        // Helper function for status updates
+        function setStatus(text, thinking = false) {
+            status.textContent = text;
+            statusIndicator.className = thinking ? 'status-indicator thinking' : 'status-indicator';
+        }
+
         // Load initial agent
         loadAgent(agentSelect.value);
 
@@ -520,6 +551,8 @@ Squawk helpful answers with personality!`
                 agent.hide(true);
             }
             conversationHistory = [];
+            conversationSummary = null;
+            privateMemory = null;
             chatContainer.innerHTML = '<div style="text-align: center; color: #808080; padding: 20px;">Loading new assistant...</div>';
             loadAgent(e.target.value);
         });
@@ -528,8 +561,7 @@ Squawk helpful answers with personality!`
         function loadAgent(agentName) {
             const personality = personalities[agentName];
             chatTitle.textContent = `${personality.icon} ${personality.name} Chat`;
-            status.textContent = `Loading ${personality.name}...`;
-            statusIndicator.className = 'status-indicator thinking';
+            setStatus(`Loading ${personality.name}...`, true);
             userInput.disabled = true;
             sendBtn.disabled = true;
 
@@ -542,8 +574,7 @@ Squawk helpful answers with personality!`
                     agent.moveTo(window.innerWidth - 150, window.innerHeight - 200, 1000);
                 }, 500);
 
-                status.textContent = `${personality.name} is ready!`;
-                statusIndicator.className = 'status-indicator';
+                setStatus(`${personality.name} is ready!`);
                 userInput.disabled = false;
                 sendBtn.disabled = false;
                 userInput.focus();
@@ -579,8 +610,7 @@ Squawk helpful answers with personality!`
             userInput.value = '';
             userInput.disabled = true;
             sendBtn.disabled = true;
-            status.textContent = 'Thinking...';
-            statusIndicator.className = 'status-indicator thinking';
+            setStatus('Thinking...', true);
 
             // Agent thinking animation
             agent.play('Thinking') || agent.play('Processing') || agent.animate();
@@ -590,14 +620,12 @@ Squawk helpful answers with personality!`
                 addMessage('assistant', response);
                 agent.speak(response, false);
                 agent.play('Explain') || agent.animate();
-                status.textContent = 'Ready';
-                statusIndicator.className = 'status-indicator';
+                setStatus('Ready');
             } catch (error) {
                 const errorMsg = `Sorry, I couldn't connect to Ollama. Make sure it's running at ${ollamaUrl.value}`;
                 addMessage('assistant', errorMsg);
                 agent.speak(errorMsg);
-                status.textContent = 'Connection Error';
-                statusIndicator.className = 'status-indicator';
+                setStatus('Connection Error');
                 statusIndicator.style.background = '#ff0000';
                 console.error('Ollama error:', error);
             }
@@ -607,23 +635,78 @@ Squawk helpful answers with personality!`
             userInput.focus();
         }
 
+        // Summarize old conversation history
+        async function summarizeHistory(messages) {
+            const summaryPrompt = [
+                {
+                    role: 'system',
+                    content: 'You are a helpful assistant that summarizes conversations. Create a concise summary of the key topics, questions, and information discussed. Keep it brief (3-5 sentences).'
+                },
+                {
+                    role: 'user',
+                    content: `Please summarize this conversation:\n\n${messages.map(m => `${m.role}: ${m.content}`).join('\n\n')}`
+                }
+            ];
+
+            const response = await fetch(`${ollamaUrl.value}/api/chat`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    model: modelName.value,
+                    messages: summaryPrompt,
+                    stream: false
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data.message.content;
+        }
+
         // Chat with Ollama
         async function chatWithOllama(userMessage) {
             const currentAgent = agentSelect.value;
             const personality = personalities[currentAgent];
 
+            const systemPrompt = `${personality.systemPrompt}\n\n${genericSystemPrompt}`
+
             // Build messages array
             const messages = [
                 {
                     role: 'system',
-                    content: personality.systemPrompt
-                },
+                    content: systemPrompt
+                }
+            ];
+
+            // Add private memory if it exists
+            if (privateMemory) {
+                messages.push({
+                    role: 'system',
+                    content: `Your private memory: ${privateMemory}`
+                });
+            }
+
+            // Add conversation summary if it exists
+            if (conversationSummary) {
+                messages.push({
+                    role: 'system',
+                    content: `Previous conversation summary: ${conversationSummary}`
+                });
+            }
+
+            // Add conversation history and current message
+            messages.push(
                 ...conversationHistory,
                 {
                     role: 'user',
                     content: userMessage
                 }
-            ];
+            );
 
             const response = await fetch(`${ollamaUrl.value}/api/chat`, {
                 method: 'POST',
@@ -642,17 +725,40 @@ Squawk helpful answers with personality!`
             }
 
             const data = await response.json();
-            const assistantMessage = data.message.content;
+            let assistantMessage = data.message.content;
 
-            // Update conversation history
+            // Extract and store private memory (hidden from user)
+            // Look for [MEMORY: ...] at the start of the message (may have markdown formatting around it)
+            const memoryMatch = assistantMessage.match(/^[\s\*]*\[MEMORY:\s*([\s\S]*?)\][\s\*]*/i);
+            if (memoryMatch) {
+                privateMemory = memoryMatch[1].trim();
+                // Remove memory tag and any leading markdown from displayed message
+                assistantMessage = assistantMessage.replace(/^[\s\*]*\[MEMORY:\s*[\s\S]*?\][\s\*]*\n*/i, '').trim();
+                // Also remove any leading separators like ---
+                assistantMessage = assistantMessage.replace(/^[-\s]+/, '').trim();
+            }
+
+            // Update conversation history (without memory tags)
             conversationHistory.push(
                 { role: 'user', content: userMessage },
                 { role: 'assistant', content: assistantMessage }
             );
 
-            // Keep history manageable (last 10 exchanges = 20 messages)
-            if (conversationHistory.length > 20) {
-                conversationHistory = conversationHistory.slice(-20);
+            // Keep history manageable - summarize when it gets too long
+            // Max 60 messages (30 exchanges), keep most recent 30 messages (15 exchanges)
+            if (conversationHistory.length > 60) {
+                const oldMessages = conversationHistory.slice(0, -30);
+                const newSummary = await summarizeHistory(oldMessages);
+
+                // Combine with existing summary if present
+                if (conversationSummary) {
+                    conversationSummary = `${conversationSummary}\n\n${newSummary}`;
+                } else {
+                    conversationSummary = newSummary;
+                }
+
+                // Keep only the most recent 30 messages
+                conversationHistory = conversationHistory.slice(-30);
             }
 
             return assistantMessage;
@@ -669,7 +775,13 @@ Squawk helpful answers with personality!`
 
             const messageContent = document.createElement('div');
             messageContent.className = 'message-content';
-            messageContent.textContent = content;
+
+            // Render markdown for assistant messages, plain text for user messages
+            if (role === 'assistant') {
+                messageContent.innerHTML = marked.parse(content);
+            } else {
+                messageContent.textContent = content;
+            }
 
             messageGroup.appendChild(header);
             messageGroup.appendChild(messageContent);
